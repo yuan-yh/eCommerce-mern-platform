@@ -22,8 +22,7 @@ const importData = async () => {
 
         // Pass in the data and return an array
         const createUsers = await User.insertMany(users);
-        // // Create the first user: admin with id 0
-        // const adminUser = createUsers[0]._id;
+
         ////////////////////////////////////////////////////////////////////
         // Create a map of usernames to user IDs
         const userMap = {};
@@ -39,6 +38,8 @@ const importData = async () => {
             return { ...product, user: userMap[product.username] };
         });
         ////////////////////////////////////////////////////////////////////
+        // // Create the first user: admin with id 0
+        // const adminUser = createUsers[0]._id;
         // const sampleProducts = products.map((product) => {
         //     return { ...product, user: adminUser };
         // })
