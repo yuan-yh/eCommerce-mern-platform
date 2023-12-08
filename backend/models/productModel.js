@@ -14,7 +14,7 @@ const reviewSchema = new Schema({
 const productSchema = new Schema({
     // Only ADMIN or SELLER can add new products.
     user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
-    username: { type: String, required: true, unique: true },
+    username: { type: String, required: true },
     name: { type: String, required: true, unique: true },
     image: { type: String, required: true },
     brand: { type: String, required: true },
