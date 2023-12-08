@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const reviewSchema = new Schema({
-    // The user account which writes this comment.
+    // Only ADMIN or BUYER can write comments.
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
     name: { type: String, required: true },
     rating: { type: Number, required: true, default: 0 },
@@ -12,8 +12,9 @@ const reviewSchema = new Schema({
 });
 
 const productSchema = new Schema({
-    // The user account which sells this product.
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    // Only ADMIN or SELLER can add new products.
+    user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+    username: { type: String, required: true, unique: true },
     name: { type: String, required: true, unique: true },
     image: { type: String, required: true },
     brand: { type: String, required: true },

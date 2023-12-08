@@ -22,12 +22,26 @@ const importData = async () => {
 
         // Pass in the data and return an array
         const createUsers = await User.insertMany(users);
-        // Create the first user: admin with id 0
-        const adminUser = createUsers[0]._id;
+        // // Create the first user: admin with id 0
+        // const adminUser = createUsers[0]._id;
+        ////////////////////////////////////////////////////////////////////
+        // Create a map of usernames to user IDs
+        const userMap = {};
+        createUsers.forEach(user => {
+            userMap[user.name] = user._id;
+        });
 
+        // Map each product to the user ID based on the username
         const sampleProducts = products.map((product) => {
-            return { ...product, user: adminUser };
-        })
+            if (!userMap[product.username]) {
+                throw new Error(`User (Seller) ${product.username} not found`);
+            }
+            return { ...product, user: userMap[product.username] };
+        });
+        ////////////////////////////////////////////////////////////////////
+        // const sampleProducts = products.map((product) => {
+        //     return { ...product, user: adminUser };
+        // })
         // const createProducts = async () => { await Product.insertMany(sampleProducts); }
         // createProducts();
         await Product.insertMany(sampleProducts);
