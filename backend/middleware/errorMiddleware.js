@@ -8,7 +8,7 @@ const notFound = (req, res, next) => {
 // overwrite the default error handler
 const errorHandler = (err, req, res, next) => {
     // if the status code is 200, change to 500
-    let statusCode = (res.status === 200) ? 500 : res.status;
+    let statusCode = res.statusCode === 200 ? 500 : res.statusCode;
     let message = err.message;
 
     // check for the Mongoose bad ObjectId error
@@ -18,7 +18,7 @@ const errorHandler = (err, req, res, next) => {
     }
 
     res.status(statusCode).json({
-        message,
+        message: message,
         stack: process.env.NODE_ENV === 'production' ? null : err.stack,
     });
 };
