@@ -32,7 +32,7 @@ const createOrder = asyncHandler(async (req, res) => {
                 _id: undefined,
             })),
             user: req.user._id,
-            // seller: orderItems.map((x) => (x.user)),
+            seller: orderItems.map((x) => (x.user)),
             shippingAddress,
             paymentMethod,
             itemsPrice,
@@ -106,7 +106,7 @@ const getMyOrders = asyncHandler(async (req, res) => {
 
 // @desc    Get order by ID
 // @route   GET /api/orders/:id
-// @access  Private/ADMIN
+// @access  Private
 const getOrderById = asyncHandler(async (req, res) => {
     // res.send('get order by id');
     // add the user (name & email) in the order
@@ -124,9 +124,8 @@ const getOrderById = asyncHandler(async (req, res) => {
 // @route   PUT /api/orders/:id/pay
 // @access  Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
-    res.send('update order to be paid');
-    //     // NOTE: here we need to verify the payment was made to PayPal before marking
-    //     // the order as paid
+    // res.send('update order to be paid');
+    // verify the payment was made to PayPal before marking the order as paid
     //     const { verified, value } = await verifyPayPalPayment(req.body.id);
     //     if (!verified) throw new Error('Payment not verified');
 
@@ -134,29 +133,29 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     //     const isNewTransaction = await checkIfNewTransaction(Order, req.body.id);
     //     if (!isNewTransaction) throw new Error('Transaction has been used before');
 
-    //     const order = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id);
 
-    //     if (order) {
-    //         // check the correct amount was paid
-    //         const paidCorrectAmount = order.totalPrice.toString() === value;
-    //         if (!paidCorrectAmount) throw new Error('Incorrect amount paid');
+    if (order) {
+        //         // check the correct amount was paid
+        //         const paidCorrectAmount = order.totalPrice.toString() === value;
+        //         if (!paidCorrectAmount) throw new Error('Incorrect amount paid');
 
-    //         order.isPaid = true;
-    //         order.paidAt = Date.now();
-    //         order.paymentResult = {
-    //             id: req.body.id,
-    //             status: req.body.status,
-    //             update_time: req.body.update_time,
-    //             email_address: req.body.payer.email_address,
-    //         };
+        order.isPaid = true;
+        order.paidAt = Date.now();
+        order.paymentResult = {
+            id: req.body.id,
+            status: req.body.status,
+            update_time: req.body.update_time,
+            email_address: req.body.payer.email_address,
+        };
 
-    //         const updatedOrder = await order.save();
+        const updatedOrder = await order.save();
 
-    //         res.json(updatedOrder);
-    //     } else {
-    //         res.status(404);
-    //         throw new Error('Order not found');
-    //     }
+        res.json(updatedOrder);
+    } else {
+        res.status(404);
+        throw new Error('Order not found');
+    }
 });
 
 // @desc    Update order to delivered - for SELLERS only & ADMIN???

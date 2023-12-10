@@ -17,6 +17,15 @@ import RegisterScreen from './screens/RegisterScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
+// import ProfileScreen from './screens/ProfileScreen';
+// import OrderListScreen from './screens/admin/OrderListScreen';
+// import ProductListScreen from './screens/admin/ProductListScreen';
+// import ProductEditScreen from './screens/admin/ProductEditScreen';
+// import UserListScreen from './screens/admin/UserListScreen';
+// import UserEditScreen from './screens/admin/UserEditScreen';
+// import store from './store';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 
 const router = createBrowserRouter(
@@ -34,8 +43,8 @@ const router = createBrowserRouter(
         <Route path='/shipping' element={<ShippingScreen />} />
         <Route path='/payment' element={<PaymentScreen />} />
         <Route path='/placeorder' element={<PlaceOrderScreen />} />
-        {/* <Route path='/order/:id' element={<OrderScreen />} />
-        <Route path='/profile' element={<ProfileScreen />} /> */}
+        <Route path='/order/:id' element={<OrderScreen />} />
+        {/* <Route path='/profile' element={<ProfileScreen />} /> */}
       </Route>
 
       {/* Private contents for admin users */}
@@ -58,7 +67,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PayPalScriptProvider deferLoading={true}>
+        <RouterProvider router={router} />
+      </PayPalScriptProvider>
     </Provider>
   </React.StrictMode>
 );
