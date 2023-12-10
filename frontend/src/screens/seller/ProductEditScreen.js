@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import {
     useGetProductDetailsQuery,
     useUpdateProductMutation,
-    // useUploadProductImageMutation,
+    useUploadProductImageMutation,
 } from '../../slices/productsApiSlice';
 
 const ProductEditScreen = () => {
@@ -31,9 +31,7 @@ const ProductEditScreen = () => {
     // console.log(product);
 
     const [updateProduct, { isLoading: loadingUpdate }] = useUpdateProductMutation();
-
-    // const [uploadProductImage, { isLoading: loadingUpload }] =
-    //     useUploadProductImageMutation();
+    const [uploadProductImage, { isLoading: loadingUpload }] = useUploadProductImageMutation();
 
     const navigate = useNavigate();
 
@@ -49,17 +47,18 @@ const ProductEditScreen = () => {
         }
     }, [product]);
 
-    // const uploadFileHandler = async (e) => {
-    //     const formData = new FormData();
-    //     formData.append('image', e.target.files[0]);
-    //     try {
-    //         const res = await uploadProductImage(formData).unwrap();
-    //         toast.success(res.message);
-    //         setImage(res.image);
-    //     } catch (err) {
-    //         toast.error(err?.data?.message || err.error);
-    //     }
-    // };
+    const uploadFileHandler = async (e) => {
+        // console.log(e.target.files[0]);
+        const formData = new FormData();
+        formData.append('image', e.target.files[0]);
+        try {
+            const res = await uploadProductImage(formData).unwrap();
+            toast.success(res.message);
+            setImage(res.image);
+        } catch (e) {
+            toast.error(e?.data?.message || e.error);
+        }
+    };
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -127,10 +126,10 @@ const ProductEditScreen = () => {
                             ></Form.Control>
                             <Form.Control
                                 label='Choose File'
-                                // onChange={uploadFileHandler}
+                                onChange={uploadFileHandler}
                                 type='file'
                             ></Form.Control>
-                            {/* {loadingUpload && <Loader />} */}
+                            {loadingUpload && <Loader />}
                         </Form.Group>
 
                         <Form.Group controlId='brand'>
