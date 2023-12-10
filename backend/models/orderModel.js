@@ -2,12 +2,14 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const orderSchema = new Schema({
-    // The user account for seller or buyer ????
+    // The user account for buyer
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    // An array of user accounts for sellers
+    seller: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     // [] indicates that it will be an array of objects.
     orderItems: [{
         name: { type: String, required: true },     // Product name
-        quantity: { type: Number, required: true },
+        qty: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
         product: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'product' }
@@ -18,7 +20,7 @@ const orderSchema = new Schema({
         postalCode: { type: Number, required: true },
         country: { type: String, required: true }
     },
-    payment: { type: String, required: true },
+    paymentMethod: { type: String, required: true },
     paymentResult: {
         id: { type: String },
         status: { type: String },

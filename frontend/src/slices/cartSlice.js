@@ -42,13 +42,14 @@ const cartSlice = createSlice({
             return updateCart(state);
             // localStorage.setItem('cart', JSON.stringify(state));
         },
-        //         clearCartItems: (state, action) => {
-        //             state.cartItems = [];
-        //             localStorage.setItem('cart', JSON.stringify(state));
-        //         },
-        //         // NOTE: here we need to reset state for when a user logs out so the next
-        //         // user doesn't inherit the previous users cart and shipping
-        //         resetCart: (state) => (state = initialState),
+        clearCart: (state, action) => {
+            state.cartItems = [];
+            return updateCart(state);
+            // localStorage.setItem('cart', JSON.stringify(state));
+        },
+        // // NOTE: here we need to reset state for when a user logs out so the next
+        // // user doesn't inherit the previous users cart and shipping
+        // resetCart: (state) => (state = initialState),
     },
 });
 
@@ -57,7 +58,7 @@ export const {
     removeFromCart,
     saveShippingAddress,
     savePaymentMethod,
-    //     clearCartItems,
+    clearCart,
     //     resetCart,
 } = cartSlice.actions;
 

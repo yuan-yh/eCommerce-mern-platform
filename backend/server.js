@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 // import products from './data/products.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 // Connect to MongoDB
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.get('/hello', (req, res) => { res.send('Hello eCommerce API!') });
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
