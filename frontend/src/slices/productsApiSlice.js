@@ -15,10 +15,15 @@ export const productsApiSlice = apiSlice.injectEndpoints({
             }),
             keepUnusedDataFor: 5,
         }),
+        createProduct: builder.mutation({
+            query: () => ({
+                url: `${PRODUCTS_URL}`,
+                method: 'POST',
+            }),
+            invalidatesTags: ['Product'],
+        }),
     }),
 });
-
-export const { useGetProductsQuery, useGetProductDetailsQuery } = productsApiSlice;
 
 // endpoints: (builder) => ({
 //     getProducts: builder.query({
@@ -34,13 +39,6 @@ export const { useGetProductsQuery, useGetProductDetailsQuery } = productsApiSli
 //             url: `${PRODUCTS_URL}/${productId}`,
 //         }),
 //         keepUnusedDataFor: 5,
-//     }),
-//     createProduct: builder.mutation({
-//         query: () => ({
-//             url: `${PRODUCTS_URL}`,
-//             method: 'POST',
-//         }),
-//         invalidatesTags: ['Product'],
 //     }),
 //     updateProduct: builder.mutation({
 //         query: (data) => ({
@@ -79,13 +77,13 @@ export const { useGetProductsQuery, useGetProductDetailsQuery } = productsApiSli
 // }),
 // });
 
-// export const {
-//     useGetProductsQuery,
-// useGetProductDetailsQuery,
-// useCreateProductMutation,
-// useUpdateProductMutation,
-// useUploadProductImageMutation,
-// useDeleteProductMutation,
-// useCreateReviewMutation,
-// useGetTopProductsQuery,
-// } = productsApiSlice;
+export const {
+    useGetProductsQuery,
+    useGetProductDetailsQuery,
+    useCreateProductMutation,
+    // useUpdateProductMutation,
+    // useUploadProductImageMutation,
+    // useDeleteProductMutation,
+    // useCreateReviewMutation,
+    // useGetTopProductsQuery,
+} = productsApiSlice;

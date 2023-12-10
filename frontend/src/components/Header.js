@@ -65,6 +65,31 @@ const Header = () => {
                                         <LinkContainer to='/profile'>
                                             <NavDropdown.Item>Profile</NavDropdown.Item>
                                         </LinkContainer>
+                                        {userInfo && userInfo.role === "SELLER" && (
+                                            <LinkContainer to='/seller/productlist'>
+                                                <NavDropdown.Item>View All Products</NavDropdown.Item>
+                                            </LinkContainer>
+                                        )}
+                                        {userInfo && userInfo.role === "SELLER" && (
+                                            <LinkContainer to='/seller/orderlist'>
+                                                <NavDropdown.Item>View All Orders</NavDropdown.Item>
+                                            </LinkContainer>
+                                        )}
+                                        {userInfo && userInfo.role === "ADMIN" && (
+                                            <LinkContainer to='/admin/productlist'>
+                                                <NavDropdown.Item>View All Products</NavDropdown.Item>
+                                            </LinkContainer>
+                                        )}
+                                        {userInfo && userInfo.role === "ADMIN" && (
+                                            <LinkContainer to='/admin/orderlist'>
+                                                <NavDropdown.Item>View All Orders</NavDropdown.Item>
+                                            </LinkContainer>
+                                        )}
+                                        {userInfo && userInfo.role === "ADMIN" && (
+                                            <LinkContainer to='/admin/userlist'>
+                                                <NavDropdown.Item>View All Users</NavDropdown.Item>
+                                            </LinkContainer>
+                                        )}
                                         <NavDropdown.Item onClick={logoutHandler}>
                                             Logout
                                         </NavDropdown.Item>
@@ -77,6 +102,31 @@ const Header = () => {
                                     </Nav.Link>
                                 </LinkContainer>
                             )}
+
+                            {/* Seller Links */}
+                            {/* <Route path='/seller/product/:id/edit' element={<ProductEditScreen />} /> */}
+                            {/* {userInfo && userInfo.role === "SELLER" && (
+                                <NavDropdown title='Seller' id='sellermenu'>
+                                    <LinkContainer to='/admin/productlist'>
+                                        <NavDropdown.Item>Products</NavDropdown.Item>
+                                    </LinkContainer>
+                                </NavDropdown>
+                            )} */}
+
+                            {/* Admin Links */}
+                            {/* {userInfo && userInfo.role === "ADMIN" && (
+                                <NavDropdown title='Admin' id='adminmenu'>
+                                    <LinkContainer to='/admin/productlist'>
+                                        <NavDropdown.Item>Products</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='/admin/orderlist'>
+                                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to='/admin/userlist'>
+                                        <NavDropdown.Item>Users</NavDropdown.Item>
+                                    </LinkContainer>
+                                </NavDropdown>
+                            )} */}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

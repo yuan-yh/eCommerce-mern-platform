@@ -9,6 +9,8 @@ import './assets/styles/index.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import PrivateRoute from './components/PrivateRoute';
+import SellerRoute from './components/SellerRoute';
+import AdminRoute from './components/AdminRoute';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
@@ -19,8 +21,8 @@ import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
-// import OrderListScreen from './screens/admin/OrderListScreen';
-// import ProductListScreen from './screens/admin/ProductListScreen';
+import OrderListScreen from './screens/admin/OrderListScreen';
+import ProductListScreen from './screens/admin/ProductListScreen';
 // import ProductEditScreen from './screens/admin/ProductEditScreen';
 // import UserListScreen from './screens/admin/UserListScreen';
 // import UserEditScreen from './screens/admin/UserEditScreen';
@@ -47,18 +49,24 @@ const router = createBrowserRouter(
         <Route path='/profile' element={<ProfileScreen />} />
       </Route>
 
+      {/* Private contents for seller users */}
+      <Route path='' element={<SellerRoute />}>
+        <Route path='/seller/orderlist' element={<OrderListScreen />} />
+        <Route path='/seller/productlist' element={<ProductListScreen />} />
+        {/* <Route path='/seller/product/:id/edit' element={<ProductEditScreen />} /> */}
+      </Route>
+
       {/* Private contents for admin users */}
-      {/* <Route path='' element={<AdminRoute />}>
+      <Route path='' element={<AdminRoute />}>
         <Route path='/admin/orderlist' element={<OrderListScreen />} />
         <Route path='/admin/productlist' element={<ProductListScreen />} />
-        <Route
+        {/* <Route
           path='/admin/productlist/:pageNumber'
           element={<ProductListScreen />}
         />
         <Route path='/admin/userlist' element={<UserListScreen />} />
-        <Route path='/admin/product/:id/edit' element={<ProductEditScreen />} />
-        <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
-      </Route> */}
+        <Route path='/admin/user/:id/edit' element={<UserEditScreen />} /> */}
+      </Route>
     </Route>
   )
 );

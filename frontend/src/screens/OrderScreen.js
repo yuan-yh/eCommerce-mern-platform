@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import {
-    // useDeliverOrderMutation,
+    useDeliverOrderMutation,
     useGetOrderDetailsQuery,
     useGetPaypalClientIdQuery,
     usePayOrderMutation,
@@ -27,8 +27,7 @@ const OrderScreen = () => {
 
     const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
 
-    // const [deliverOrder, { isLoading: loadingDeliver }] =
-    //     useDeliverOrderMutation();
+    const [deliverOrder, { isLoading: loadingDeliver }] = useDeliverOrderMutation();
 
     const { userInfo } = useSelector((state) => state.auth);
 
@@ -98,10 +97,10 @@ const OrderScreen = () => {
             });
     }
 
-    // const deliverHandler = async () => {
-    //     await deliverOrder(orderId);
-    //     refetch();
-    // };
+    const deliverHandler = async () => {
+        await deliverOrder(orderId);
+        refetch();
+    };
 
     // return <div>order complete screen</div>;
     return isLoading ? (
@@ -221,6 +220,7 @@ const OrderScreen = () => {
                                     <Col>${order.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
+
                             {/* Show the following content if the order is not paid. */}
                             {!order.isPaid && (
                                 <ListGroup.Item>
@@ -247,22 +247,19 @@ const OrderScreen = () => {
                                 </ListGroup.Item>
                             )}
 
-                            {/* {loadingDeliver && <Loader />}
-
-                            {userInfo &&
-                                userInfo.isAdmin &&
-                                order.isPaid &&
-                                !order.isDelivered && (
-                                    <ListGroup.Item>
-                                        <Button
-                                            type='button'
-                                            className='btn btn-block'
-                                            onClick={deliverHandler}
-                                        >
-                                            Mark As Delivered
-                                        </Button>
-                                    </ListGroup.Item>
-                                )} */}
+                            {loadingDeliver && <Loader />}
+                            {/* Only seller users can deliver paid products. */}
+                            {userInfo && userInfo.role === "SELLER" && order.isPaid && !order.isDelivered && (
+                                <ListGroup.Item>
+                                    <Button
+                                        type='button'
+                                        className='btn btn-block'
+                                        onClick={deliverHandler}
+                                    >
+                                        Mark As Delivered
+                                    </Button>
+                                </ListGroup.Item>
+                            )}
                         </ListGroup>
                     </Card>
                 </Col>
