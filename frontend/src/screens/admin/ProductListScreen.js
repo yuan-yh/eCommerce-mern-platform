@@ -1,3 +1,4 @@
+import { useSelector, useDispatch } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { FaEdit, FaPlus, FaTrash } from 'react-icons/fa';
@@ -13,6 +14,7 @@ import {
 import { toast } from 'react-toastify';
 
 const ProductListScreen = () => {
+    const { userInfo } = useSelector((state) => state.auth);
     const { data: products, isLoading, error, refetch } = useGetProductsQuery();
     // console.log(products);
     // const { pageNumber } = useParams();
@@ -76,7 +78,7 @@ const ProductListScreen = () => {
                                 <th>PRICE</th>
                                 <th>CATEGORY</th>
                                 <th>BRAND</th>
-                                <th></th>
+                                {userInfo && userInfo.role === "SELLER" && (<th>UPDATE</th>)}
                             </tr>
                         </thead>
                         <tbody>
@@ -84,24 +86,30 @@ const ProductListScreen = () => {
                                 // {data.products.map((product) => (
                                 <tr key={product._id}>
                                     <td>{product._id}</td>
-                                    <td>{product.name}</td>
+                                    <td>
+                                        <LinkContainer to={`/product/${product._id}`}>
+                                            <span>{product.name}</span>
+                                        </LinkContainer>
+                                    </td>
                                     <td>${product.price}</td>
                                     <td>{product.category}</td>
                                     <td>{product.brand}</td>
-                                    <td>
-                                        <LinkContainer to={`/seller/product/${product._id}/edit`}>
-                                            <Button variant='light' className='btn-sm mx-2'>
-                                                <FaEdit />
+                                    {userInfo && userInfo.role === "SELLER" && (
+                                        <td>
+                                            <LinkContainer to={`/seller/product/${product._id}/edit`}>
+                                                <Button variant='light' className='btn-sm mx-2'>
+                                                    <FaEdit />
+                                                </Button>
+                                            </LinkContainer>
+                                            <Button
+                                                variant='danger'
+                                                className='btn-sm'
+                                                onClick={() => deleteHandler(product._id)}
+                                            >
+                                                <FaTrash style={{ color: 'white' }} />
                                             </Button>
-                                        </LinkContainer>
-                                        <Button
-                                            variant='danger'
-                                            className='btn-sm'
-                                            onClick={() => deleteHandler(product._id)}
-                                        >
-                                            <FaTrash style={{ color: 'white' }} />
-                                        </Button>
-                                    </td>
+                                        </td>
+                                    )}
                                 </tr>
                             ))}
                         </tbody>

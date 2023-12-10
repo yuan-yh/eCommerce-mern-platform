@@ -23,7 +23,7 @@ import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import OrderListScreen from './screens/admin/OrderListScreen';
 import ProductListScreen from './screens/admin/ProductListScreen';
-// import ProductEditScreen from './screens/admin/ProductEditScreen';
+import ProductEditScreen from './screens/seller/ProductEditScreen';
 // import UserListScreen from './screens/admin/UserListScreen';
 // import UserEditScreen from './screens/admin/UserEditScreen';
 // import store from './store';
@@ -53,7 +53,7 @@ const router = createBrowserRouter(
       <Route path='' element={<SellerRoute />}>
         <Route path='/seller/orderlist' element={<OrderListScreen />} />
         <Route path='/seller/productlist' element={<ProductListScreen />} />
-        {/* <Route path='/seller/product/:id/edit' element={<ProductEditScreen />} /> */}
+        <Route path='/seller/product/:id/edit' element={<ProductEditScreen />} />
       </Route>
 
       {/* Private contents for admin users */}

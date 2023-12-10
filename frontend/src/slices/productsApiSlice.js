@@ -7,6 +7,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: PRODUCTS_URL,
             }),
+            providesTags: ['Product'],
             keepUnusedDataFor: 5,
         }),
         getProductDetails: builder.query({
@@ -21,6 +22,14 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                 method: 'POST',
             }),
             invalidatesTags: ['Product'],
+        }),
+        updateProduct: builder.mutation({
+            query: (data) => ({
+                url: `${PRODUCTS_URL}/${data.productId}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: ['Products'],
         }),
     }),
 });
@@ -39,14 +48,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 //             url: `${PRODUCTS_URL}/${productId}`,
 //         }),
 //         keepUnusedDataFor: 5,
-//     }),
-//     updateProduct: builder.mutation({
-//         query: (data) => ({
-//             url: `${PRODUCTS_URL}/${data.productId}`,
-//             method: 'PUT',
-//             body: data,
-//         }),
-//         invalidatesTags: ['Products'],
 //     }),
 //     uploadProductImage: builder.mutation({
 //         query: (data) => ({
@@ -81,7 +82,7 @@ export const {
     useGetProductsQuery,
     useGetProductDetailsQuery,
     useCreateProductMutation,
-    // useUpdateProductMutation,
+    useUpdateProductMutation,
     // useUploadProductImageMutation,
     // useDeleteProductMutation,
     // useCreateReviewMutation,
