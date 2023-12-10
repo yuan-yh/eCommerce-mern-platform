@@ -13,7 +13,7 @@ const RegisterScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -40,7 +40,8 @@ const RegisterScreen = () => {
         } else {
             try {
                 // const res = await register({ name, email, password, role }).unwrap();
-                const res = await register({ name, email, password }).unwrap();
+                // const res = await register({ name, email, password }).unwrap();
+                const res = await register({ name, email, password, role: (role ? 'SELLER' : undefined) }).unwrap();
                 dispatch(setCredentials({ ...res }));
                 navigate(redirect);
             } catch (err) {
@@ -90,6 +91,16 @@ const RegisterScreen = () => {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     ></Form.Control>
+                </Form.Group>
+
+                <Form.Group className='my-2' controlId='checkRole'>
+                    <Form.Check
+                        type="switch"
+                        id="custom-switch"
+                        label="I want to sell products."
+                        value={role}
+                        onChange={(e) => setRole(e.target.checked)}
+                    />
                 </Form.Group>
 
                 <Button disabled={isLoading} type='submit' variant='primary'>
