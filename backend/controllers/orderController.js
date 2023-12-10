@@ -6,7 +6,7 @@ import { calcPrices } from '../utils/calcPrices.js';
 
 // @desc    Create new order
 // @route   POST /api/orders
-// @access  Private
+// @access  Private/BUYER
 const createOrder = asyncHandler(async (req, res) => {
     // res.send('create an order');
     const { orderItems,

@@ -29,6 +29,16 @@ const protect = asyncHandler(async (req, res, next) => {
     }
 });
 
+// Check for the BUYER user
+const buyer = (req, res, next) => {
+    if (req.user && req.user.role === "BUYER") {
+        next();
+    } else {
+        res.status(401);
+        throw new Error('Not authorized as a buyer');
+    }
+};
+
 // Check for the SELLER user
 const seller = (req, res, next) => {
     if (req.user && req.user.role === "SELLER") {
@@ -49,4 +59,4 @@ const admin = (req, res, next) => {
     }
 };
 
-export { protect, seller, admin };
+export { protect, buyer, seller, admin };

@@ -8,9 +8,9 @@ import {
     updateOrderToDelivered,
     getOrders,
 } from '../controllers/orderController.js';
-import { protect, seller, admin } from '../middleware/authMiddleware.js';
+import { protect, buyer, seller, admin } from '../middleware/authMiddleware.js';
 
-router.route('/').post(protect, createOrder).get(protect, admin, getOrders);
+router.route('/').post(protect, buyer, createOrder).get(protect, admin, getOrders);
 router.route('/mine').get(protect, getMyOrders);
 router.route('/:id').get(protect, getOrderById);
 router.route('/:id/pay').put(protect, updateOrderToPaid);
