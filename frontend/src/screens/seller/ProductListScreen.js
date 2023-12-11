@@ -9,7 +9,7 @@ import Loader from '../../components/Loader';
 import {
     useGetProductsQuery,
     useCreateProductMutation,
-    // useDeleteProductMutation,
+    useDeleteProductMutation,
 } from '../../slices/productsApiSlice';
 import { toast } from 'react-toastify';
 
@@ -33,19 +33,18 @@ const ProductListScreen = () => {
         }
     };
 
-    // const [deleteProduct, { isLoading: loadingDelete }] =
-    //     useDeleteProductMutation();
-
-    const deleteHandler = async (id) => {
-        console.log("delete a product: ", id);
-        //     if (window.confirm('Are you sure')) {
-        //         try {
-        //             await deleteProduct(id);
-        //             refetch();
-        //         } catch (err) {
-        //             toast.error(err?.data?.message || err.error);
-        //         }
-        //     }
+    const [deleteProduct, { isLoading: loadingDelete }] = useDeleteProductMutation();
+    const deleteHandler = async (id, name) => {
+        // console.log("delete a product: ", id);
+        if (window.confirm(`Confirm: delete the product ${name}?`)) {
+            try {
+                await deleteProduct(id);
+                toast.success(`${name} deleted`);
+                refetch();
+            } catch (e) {
+                toast.error(e?.data?.message || e.error);
+            }
+        }
     };
 
     return (
@@ -53,7 +52,7 @@ const ProductListScreen = () => {
             {/* <div>View All Products</div> */}
             <Row className='align-items-center'>
                 <Col>
-                    <h1>Products</h1>
+                    <h1>Product List</h1>
                 </Col>
                 <Col className='text-end'>
                     <Button className='my-3' onClick={createProductHandler}>
@@ -63,7 +62,7 @@ const ProductListScreen = () => {
             </Row>
 
             {loadingCreate && <Loader />}
-            {/* {loadingDelete && <Loader />} */}
+            {loadingDelete && <Loader />}
             {isLoading ? (
                 <Loader />
             ) : error ? (
@@ -104,7 +103,7 @@ const ProductListScreen = () => {
                                             <Button
                                                 variant='danger'
                                                 className='btn-sm'
-                                                onClick={() => deleteHandler(product._id)}
+                                                onClick={() => deleteHandler(product._id, product.name)}
                                             >
                                                 <FaTrash style={{ color: 'white' }} />
                                             </Button>

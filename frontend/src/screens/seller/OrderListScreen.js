@@ -10,7 +10,7 @@ const OrderListScreen = () => {
 
     return (
         <>
-            <h1>Orders</h1>
+            <h1>Order List</h1>
             {isLoading ? (
                 <Loader />
             ) : error ? (
