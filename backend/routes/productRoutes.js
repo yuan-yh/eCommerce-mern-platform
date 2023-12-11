@@ -5,10 +5,10 @@ import {
     createProduct,
     updateProduct,
     deleteProduct,
-    // createProductReview,
+    createProductReview,
     // getTopProducts,
 } from "../controllers/productController.js";
-import { protect, seller, admin } from '../middleware/authMiddleware.js';
+import { protect, buyer, seller, admin } from '../middleware/authMiddleware.js';
 // import checkObjectId from '../middleware/checkObjectId.js';
 
 const router = express.Router();
@@ -23,6 +23,7 @@ const router = express.Router();
 // define routes
 router.route('/').get(getProducts).post(protect, seller, createProduct);
 router.route('/:id').get(getProductById).put(protect, seller, updateProduct).delete(protect, seller, deleteProduct);
+router.route('/:id/reviews').post(protect, buyer, createProductReview);
 
 // router.route('/:id/reviews').post(protect, checkObjectId, createProductReview);
 // router.get('/top', getTopProducts);
