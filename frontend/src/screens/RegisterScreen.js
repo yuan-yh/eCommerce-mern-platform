@@ -96,7 +96,7 @@ const RegisterScreen = () => {
                 <Form.Group className='my-2' controlId='checkRole'>
                     <Form.Check
                         type="switch"
-                        id="custom-switch"
+                        id="role-switch"
                         label="I want to sell products."
                         value={role}
                         onChange={(e) => setRole(e.target.checked)}
