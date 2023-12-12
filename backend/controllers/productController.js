@@ -1,12 +1,28 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import Product from "../models/productModel.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
 // @desc    Fetch all products
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
-    const products = await Product.find({});
-    res.json(products)
+    // const products = await Product.find({});
+    const pageSize = process.env.PAGINATION_SIZE;
+    // const pageSize = 4;
+    const page = Number(req.query.pageNumber) || 1;
+
+    // case insensitive search
+    // if no search keywords, show all products
+    const searchKeyword = req.query.keyword
+        ? { name: { $regex: req.query.keyword, $options: 'i', }, } : {};
+
+    const count = await Product.countDocuments({ ...searchKeyword });
+    const products = await Product.find({ ...searchKeyword })
+        .limit(pageSize)
+        .skip(pageSize * (page - 1));
+
+    res.json({ products, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Fetch one product

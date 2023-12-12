@@ -35,6 +35,9 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
       {/* Public contents for all users */}
       <Route index={true} path='/' element={<HomeScreen />}></Route>
+      <Route path='/page/:pageNumber' element={<HomeScreen />} />
+      <Route path='/search/:keyword' element={<HomeScreen />} />
+      <Route path='/search/:keyword/page/:pageNumber' element={<HomeScreen />} />
       <Route path='/product/:id' element={<ProductScreen />}></Route>
       <Route path='/cart' element={<CartScreen />}></Route>
       <Route path='/login' element={<LoginScreen />} />
@@ -53,6 +56,7 @@ const router = createBrowserRouter(
       <Route path='' element={<SellerRoute />}>
         <Route path='/seller/orderlist' element={<OrderListScreen />} />
         <Route path='/seller/productlist' element={<ProductListScreen />} />
+        <Route path='/seller/productlist/:pageNumber' element={<ProductListScreen />} />
         <Route path='/seller/product/:id/edit' element={<ProductEditScreen />} />
       </Route>
 
@@ -60,7 +64,7 @@ const router = createBrowserRouter(
       <Route path='' element={<AdminRoute />}>
         <Route path='/admin/orderlist' element={<OrderListScreen />} />
         <Route path='/admin/productlist' element={<ProductListScreen />} />
-        {/* <Route path='/admin/productlist/:pageNumber' element={<ProductListScreen />} /> */}
+        <Route path='/admin/productlist/:pageNumber' element={<ProductListScreen />} />
         <Route path='/admin/userlist' element={<UserListScreen />} />
         <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
       </Route>

@@ -1,11 +1,13 @@
 // import { React, useEffect, useState } from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap';
+import { useParams, Link } from 'react-router-dom';
 // import axios from 'axios'
 // import products from '../products'
-import ProductCardFormat from '../components/ProductCard'
+import ProductCardFormat from '../components/ProductCard';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { useGetProductsQuery } from '../slices/productsApiSlice'
+import Paginate from '../components/Paginate';
+import { useGetProductsQuery } from '../slices/productsApiSlice';
 
 const HomeScreen = () => {
     // const [products, setProducts] = useState([]);
@@ -25,26 +27,32 @@ const HomeScreen = () => {
     // pageNumber,
     // }
     // );
-
-    const { data: products, isLoading, error } = useGetProductsQuery();
+    const { pageNumber, keyword } = useParams();
+    const { data, isLoading, error } = useGetProductsQuery({ keyword, pageNumber, });
 
     return (
         <>
+            {keyword && <Link to={`/`} className='btn btn-light my-3'>Go Back</Link>}
             {isLoading ? (
                 <Loader />
             ) : error ? (
                 <Message variant='danger'>{error?.data?.message || error.error}</Message>
             ) : (
                 <>
-                    <h1>Latest Products</h1>
+                    {keyword ? (<h1>Search Results</h1>) : (<h1>Latest Products</h1>)}
                     <Row>
-                        {products.map((currentProduct) => (
+                        {data.products.map((currentProduct) => (
                             <Col key={currentProduct._id} sm={12} md={6} lg={4} xl={3}>
                                 <ProductCardFormat product={currentProduct} />
                                 {/* {ProductCardFormat(currentProduct)} */}
                             </Col>
                         ))}
                     </Row>
+                    <Paginate
+                        pages={data.pages}
+                        currentPage={data.page}
+                        keyword={keyword ? keyword : ''}
+                    />
                 </>
             )}
         </>
