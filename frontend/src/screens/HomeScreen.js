@@ -39,7 +39,7 @@ const HomeScreen = () => {
                 <Message variant='danger'>{error?.data?.message || error.error}</Message>
             ) : (
                 <>
-                    {keyword ? (<h1>Search Results</h1>) : (<h1>Latest Products</h1>)}
+                    {keyword ? (<h1>Search Results</h1>) : (<h1>Latest Dreams</h1>)}
                     <Row>
                         {data.products.map((currentProduct) => (
                             <Col key={currentProduct._id} sm={12} md={6} lg={4} xl={3}>

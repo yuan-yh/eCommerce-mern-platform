@@ -45,7 +45,7 @@ const getProductById = asyncHandler(async (req, res) => {
 // @access  Private/Seller
 const createProduct = asyncHandler(async (req, res) => {
     const product = new Product({
-        name: 'New Product',
+        name: 'New Dream',
         price: 0,
         user: req.user._id,
         username: req.user.name,

@@ -38,8 +38,8 @@ const LoginScreen = () => {
             const res = await login({ email, password }).unwrap();
             dispatch(setCredentials({ ...res }));
             navigate(redirect);
-        } catch (error) {
-            toast.error(error?.data?.message || error.error);
+        } catch (e) {
+            toast.error(e?.data?.message || e.error);
         }
     };
 
@@ -76,7 +76,7 @@ const LoginScreen = () => {
 
             <Row className='py-3'>
                 <Col>
-                    New Customer or Vendor?{' '}
+                    New Dreamer or Vendor?{' '}
                     <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
                         Register
                     </Link>

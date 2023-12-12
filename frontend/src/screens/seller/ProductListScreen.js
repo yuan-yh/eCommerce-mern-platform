@@ -22,7 +22,7 @@ const ProductListScreen = () => {
     const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation();
 
     const createProductHandler = async () => {
-        if (window.confirm('Confirm: create a new product?')) {
+        if (window.confirm('Confirm: instantiate a new dream?')) {
             try {
                 await createProduct();
                 refetch();
@@ -35,7 +35,7 @@ const ProductListScreen = () => {
     const [deleteProduct, { isLoading: loadingDelete }] = useDeleteProductMutation();
     const deleteHandler = async (id, name) => {
         // console.log("delete a product: ", id);
-        if (window.confirm(`Confirm: delete the product ${name}?`)) {
+        if (window.confirm(`Confirm: delete the dream: ${name}?`)) {
             try {
                 await deleteProduct(id);
                 toast.success(`${name} deleted`);
@@ -51,13 +51,13 @@ const ProductListScreen = () => {
             {/* <div>View All Products</div> */}
             <Row className='align-items-center'>
                 <Col>
-                    <h1>Product List</h1>
+                    <h1>Dream List</h1>
                 </Col>
-                <Col className='text-end'>
+                {userInfo.role === "SELLER" && (<Col className='text-end'>
                     <Button className='my-3' onClick={createProductHandler}>
-                        <FaPlus /> Create Product
+                        <FaPlus /> Create Dream
                     </Button>
-                </Col>
+                </Col>)}
             </Row>
 
             {loadingCreate && <Loader />}

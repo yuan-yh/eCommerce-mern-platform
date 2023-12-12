@@ -7,7 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Navbar, Nav, Container, NavDropdown, Badge } from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
-import logo from '../assets/logo.png';
+// import logo from '../assets/logo5.png';
+import logo from '../assets/logo3.gif';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 import SearchBar from './SearchBar';
@@ -42,8 +43,8 @@ const Header = () => {
                 <Container>
                     <LinkContainer to='/'>
                         <Navbar.Brand>
-                            <img src={logo} alt='eCommerce' />
-                            eCommerce
+                            <img src={logo} alt='dayDream' style={{ height: '50px', width: '50px' }} />
+                            dayDream
                         </Navbar.Brand>
                     </LinkContainer>
 
@@ -69,7 +70,7 @@ const Header = () => {
                                         </LinkContainer>
                                         {userInfo && userInfo.role === "SELLER" && (
                                             <LinkContainer to='/seller/productlist'>
-                                                <NavDropdown.Item>View All Products</NavDropdown.Item>
+                                                <NavDropdown.Item>View All Dreams</NavDropdown.Item>
                                             </LinkContainer>
                                         )}
                                         {userInfo && userInfo.role === "SELLER" && (
@@ -79,7 +80,7 @@ const Header = () => {
                                         )}
                                         {userInfo && userInfo.role === "ADMIN" && (
                                             <LinkContainer to='/admin/productlist'>
-                                                <NavDropdown.Item>View All Products</NavDropdown.Item>
+                                                <NavDropdown.Item>View All Dreams</NavDropdown.Item>
                                             </LinkContainer>
                                         )}
                                         {userInfo && userInfo.role === "ADMIN" && (
