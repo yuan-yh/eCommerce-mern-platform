@@ -1,6 +1,7 @@
 // import { React, useEffect, useState } from 'react'
 import { Row, Col } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // import axios from 'axios'
 // import products from '../products'
 import ProductCardFormat from '../components/ProductCard';
@@ -27,6 +28,7 @@ const HomeScreen = () => {
     // pageNumber,
     // }
     // );
+    const { userInfo } = useSelector((state) => state.auth);
     const { pageNumber, keyword } = useParams();
     const { data, isLoading, error } = useGetProductsQuery({ keyword, pageNumber, });
 
@@ -39,7 +41,8 @@ const HomeScreen = () => {
                 <Message variant='danger'>{error?.data?.message || error.error}</Message>
             ) : (
                 <>
-                    {keyword ? (<h1>Search Results</h1>) : (<h1>Latest Dreams</h1>)}
+                    {userInfo ? (<h1>Welcome {userInfo.role} {userInfo.name} ;)</h1>) : (<h1>Welcome Anonymous Guest!</h1>)}
+                    {keyword ? (<h2>Search Results</h2>) : (<h2>Latest Dreams</h2>)}
                     <Row>
                         {data.products.map((currentProduct) => (
                             <Col key={currentProduct._id} sm={12} md={6} lg={4} xl={3}>
