@@ -106,7 +106,7 @@ const ProfileScreen = () => {
             </Col>
 
             {/* Right Column: user order summary */}
-            <Col md={9}>
+            {userInfo.role === 'BUYER' && <Col md={9}>
                 <h2>My Orders</h2>
                 {isLoading ? (
                     <Loader />
@@ -158,7 +158,7 @@ const ProfileScreen = () => {
                         </tbody>
                     </Table>
                 )}
-            </Col>
+            </Col>}
         </Row>
     );
 };
