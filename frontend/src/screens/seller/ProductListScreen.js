@@ -22,7 +22,7 @@ const ProductListScreen = () => {
     const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation();
 
     const createProductHandler = async () => {
-        if (window.confirm('Confirm: instantiate a new dream?')) {
+        if (window.confirm('Confirm: instantiate a new art?')) {
             try {
                 await createProduct();
                 refetch();
@@ -35,7 +35,7 @@ const ProductListScreen = () => {
     const [deleteProduct, { isLoading: loadingDelete }] = useDeleteProductMutation();
     const deleteHandler = async (id, name) => {
         // console.log("delete a product: ", id);
-        if (window.confirm(`Confirm: delete the dream: ${name}?`)) {
+        if (window.confirm(`Confirm: delete the art: ${name}?`)) {
             try {
                 await deleteProduct(id);
                 toast.success(`${name} deleted`);
