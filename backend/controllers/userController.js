@@ -199,6 +199,21 @@ const deleteUser = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc    Fetch one user
+// @route   GET /api/users/public/:id
+// @access  Public
+const getPublicProductById = asyncHandler(async (req, res) => {
+    const currentUser = await User.findById(req.params.id).select('-email').select('-password');
+    // const currentProduct = products.find((p) => p._id === req.params.id);
+
+    if (currentUser) {
+        return res.json(currentUser);
+    } else {
+        res.status(404);
+        throw new Error('User Not Found');
+    }
+});
+
 
 export {
     authUser,
@@ -210,4 +225,5 @@ export {
     deleteUser,
     getUserById,
     updateUser,
+    getPublicProductById,
 };

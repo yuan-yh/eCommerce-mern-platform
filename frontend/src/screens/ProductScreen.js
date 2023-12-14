@@ -82,6 +82,7 @@ const ProductScreen = () => {
                                 <ListGroupItem>
                                     <h3>{currentProduct.name}</h3>
                                 </ListGroupItem>
+                                <ListGroupItem>Seller: <Link to={`/user/public/${currentProduct.user}`}>{currentProduct.username}</Link></ListGroupItem>
                                 <ListGroupItem>
                                     <Rating rating_value={currentProduct.rating} rating_text={`${currentProduct.numberReviews} Reviews`} />
                                 </ListGroupItem>
@@ -146,7 +147,9 @@ const ProductScreen = () => {
                                 {currentProduct.reviews.map((review) => (
                                     <ListGroup.Item key={review._id}>
                                         {/* {console.log(review.anonymous)} */}
-                                        <strong>{(review.anonymous) ? 'anonymous' : review.name}</strong>
+                                        <strong>{(review.anonymous) ? 'anonymous' :
+                                            <Link to={`/user/public/${review.user}`}>{review.name}</Link>
+                                        }</strong>
                                         <Rating rating_value={review.rating} />
                                         <p>{review.createdAt.substring(0, 10)}</p>
                                         <p>{review.comment}</p>

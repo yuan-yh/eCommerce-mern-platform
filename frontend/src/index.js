@@ -26,6 +26,7 @@ import ProductListScreen from './screens/seller/ProductListScreen';
 import ProductEditScreen from './screens/seller/ProductEditScreen';
 import UserListScreen from './screens/admin/UserListScreen';
 import UserEditScreen from './screens/admin/UserEditScreen';
+import PublicProfileScreen from './screens/PublicProfileScreen';
 // import store from './store';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
       <Route path='/cart' element={<CartScreen />}></Route>
       <Route path='/login' element={<LoginScreen />} />
       <Route path='/register' element={<RegisterScreen />} />
+      <Route path='/user/public/:id' element={<PublicProfileScreen />} />
 
       {/* Private contents for registered users */}
       <Route path='' element={<PrivateRoute />}>

@@ -58,6 +58,12 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+        getUserDetailsPublic: builder.query({
+            query: (id) => ({
+                url: `${USERS_URL}/public/${id}`,
+            }),
+            keepUnusedDataFor: 5,
+        }),
     }),
 });
 
@@ -70,4 +76,5 @@ export const {
     useGetUserDetailsQuery,
     useUpdateUserMutation,
     useDeleteUserMutation,
+    useGetUserDetailsPublicQuery,
 } = userApiSlice;
