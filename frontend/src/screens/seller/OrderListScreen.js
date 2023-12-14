@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { FaTimes } from 'react-icons/fa';
@@ -35,7 +36,7 @@ const OrderListScreen = () => {
                         {orders.map((order) => (
                             <tr key={order._id}>
                                 <td>{order._id}</td>
-                                <td>{order.user && order.user.name}</td>
+                                <td><Link to={`/user/public/${order.user._id}`}>{order.user && order.user.name}</Link></td>
                                 <td>{order.createdAt.substring(0, 10)}</td>
                                 <td>${order.totalPrice}</td>
                                 <td>

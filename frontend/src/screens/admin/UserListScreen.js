@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import { FaTrash, FaEdit } from 'react-icons/fa';
@@ -52,7 +53,7 @@ const UserListScreen = () => {
                         {users.map((user) => (
                             <tr key={user._id}>
                                 <td>{user._id}</td>
-                                <td>{user.name}</td>
+                                <td><Link to={`/user/public/${user._id}`}>{user.name}</Link></td>
                                 <td>
                                     <a href={`mailto:${user.email}`}>{user.email}</a>
                                 </td>
