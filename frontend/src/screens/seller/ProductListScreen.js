@@ -51,11 +51,11 @@ const ProductListScreen = () => {
             {/* <div>View All Products</div> */}
             <Row className='align-items-center'>
                 <Col>
-                    <h1>Dream List</h1>
+                    <h1>Art List</h1>
                 </Col>
                 {userInfo.role === "SELLER" && (<Col className='text-end'>
                     <Button className='my-3' onClick={createProductHandler}>
-                        <FaPlus /> Create Dream
+                        <FaPlus /> Create Art
                     </Button>
                 </Col>)}
             </Row>

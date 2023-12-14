@@ -70,7 +70,7 @@ const Header = () => {
                                         </LinkContainer>
                                         {userInfo && userInfo.role === "SELLER" && (
                                             <LinkContainer to='/seller/productlist'>
-                                                <NavDropdown.Item>View All Books</NavDropdown.Item>
+                                                <NavDropdown.Item>View All Arts</NavDropdown.Item>
                                             </LinkContainer>
                                         )}
                                         {userInfo && userInfo.role === "SELLER" && (
@@ -80,7 +80,7 @@ const Header = () => {
                                         )}
                                         {userInfo && userInfo.role === "ADMIN" && (
                                             <LinkContainer to='/admin/productlist'>
-                                                <NavDropdown.Item>View All Books</NavDropdown.Item>
+                                                <NavDropdown.Item>View All Arts</NavDropdown.Item>
                                             </LinkContainer>
                                         )}
                                         {userInfo && userInfo.role === "ADMIN" && (

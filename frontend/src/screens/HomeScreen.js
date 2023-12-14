@@ -41,7 +41,7 @@ const HomeScreen = () => {
                 <Message variant='danger'>{error?.data?.message || error.error}</Message>
             ) : (
                 <>
-                    {userInfo ? (<h1>Welcome {userInfo.role} {userInfo.name} :)</h1>) : (<h1>Welcome Anonymous User!</h1>)}
+                    {userInfo ? (<h1>Welcome {userInfo.role} {userInfo.name}!</h1>) : (<h1>Welcome Anonymous User!</h1>)}
                     {keyword ? (<h2>Search Results</h2>) : (<h2>Latest Arts</h2>)}
                     <Row>
                         {data.products.map((currentProduct) => (
